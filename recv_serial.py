@@ -15,3 +15,6 @@ class Serial_Communication:
     def main(self):
         while True:
             self.read_one()
+
+sc = Serial_Communication(PORT)
+sc.main()
