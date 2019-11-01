@@ -20,18 +20,16 @@ void setup() {
 }
 
 void loop() {
-    char recv[30];
-    unsigned char i = 0;
+    String recv_str;
+    char recv[32];
     while (Serial.available()){
-        recv[i] = Serial.read();
+        recv[i] = Serial.readStringUntil(".");
+        recv_str.toCharArray(recv, winds_num);
 
-        if(i>winds_num || recv[i] == "."){
-            break;
-        } else {
-            if(recv[i] == 'a'){ winds_signal[i]=1;
+        for(unsigned int i=0; recv[i]=="."; i++)
+            if(recv[i] == 'a'){ winds_signal[i]=1;}
             else if(recv[i] == 'b') { winds_signal[i]=0;}
             else if(recv[i] == 'c') { winds_signal[i]=-1;}
-            i++;
         }
     }
 

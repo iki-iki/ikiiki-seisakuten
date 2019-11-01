@@ -10,7 +10,7 @@ class Windmill_Calc:
         self.last_message = []
         for i in range(len(self.windmill_num)):
             self.winds[i] = Queue()
-            self.last_message[i] = -1
+            self.last_message.append(-1)
             
     def get_msg(self, signal):
         self.calc(signal)

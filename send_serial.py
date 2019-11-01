@@ -22,6 +22,7 @@ class Send_Serial:
         self.stop_time = time.time()
         self.stop_duration = 3
         self.state_change = False
+        self.state = False
         # init calculator
         self.WC = Windmill_Calc()
     
@@ -42,6 +43,7 @@ class Send_Serial:
         # print(self.prev, " -> ", s)
         if s != self.prev: # get state change
             v = 1
+            self.state = True
             print("[INFO]start wind")
             if s is 0:
                 self.stop_time = time.time()
@@ -49,8 +51,9 @@ class Send_Serial:
         else: # if state not changes
             v = -1
             duration = time.time() - self.stop_time
-            if s is 0 and duration > self.stop_duration + 0.5:
+            if self.state and s is 0 and duration > self.stop_duration + 0.5:
                 v = 0
+                self.state = False
                 print("[INFO]stop wind")
             self.state_change = 0
         # record current state
