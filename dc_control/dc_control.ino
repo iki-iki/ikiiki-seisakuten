@@ -1,6 +1,6 @@
 int pinarray[] = {9, 8, 10, 13};
 int winds_num = sizeof(pinarray);
-int winds_signal[];
+int winds_signal;
 
 void action() {
     for(int i=0; i<winds_num; i++){
@@ -11,20 +11,38 @@ void action() {
 }
 
 void setup() {
-    for(int i=0; i<sizeof(pinarray); i++) {
+    for(int i=0; i<winds_num; i++) {
         pinMode(pinarray[i], OUTPUT);
+        winds_signal[i] = 0;
     }
     Serial.begin(115200);
     
 }
 
 void loop() {
+    char recv[30];
+    unsigned char i = 0;
     while (Serial.available()){
-        int inputchar = Serial.read();
+        recv[i] = Serial.read();
 
-        if(inputchar[0] == "a") { winds_signal[0] = 1; }
-        else if(inputchar[0] == "b") { winds_signal[0] = 0; }
-        else if(inputchar[0] == "c") { winds_signal[0] = -1; }
+        if(i>winds_num || received[i] == "."){
+            // recv[i] = '\0';
+            break;
+        } else {
+            switch(recv[i]){
+                case 'a':
+                    winds_signal[i] = 1;
+                    break;
+                case 'b':
+                    winds_signal[i] = 0;
+                    break;
+                case 'c':
+                    winds_signal[i] = -1;
+                    break;
+            }
+            i++;
+        }
     }
+
     action();
 }

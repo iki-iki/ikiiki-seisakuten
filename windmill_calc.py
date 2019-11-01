@@ -36,6 +36,7 @@ class Windmill_Calc:
                 s += b"b"
             elif a[i] is -1:
                 s += b"c"
+        s += b"."
         return s
 
     
