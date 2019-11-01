@@ -26,20 +26,11 @@ void loop() {
         recv[i] = Serial.read();
 
         if(i>winds_num || recv[i] == "."){
-            // recv[i] = '\0';
             break;
         } else {
-            switch(recv[i]){
-                case 'a':
-                    winds_signal[i] = 1;
-                    break;
-                case 'b':
-                    winds_signal[i] = 0;
-                    break;
-                case 'c':
-                    winds_signal[i] = -1;
-                    break;
-            }
+            if(recv[i] == 'a'){ winds_signal[i]=1;
+            else if(recv[i] == 'b') { winds_signal[i]=0;}
+            else if(recv[i] == 'c') { winds_signal[i]=-1;}
             i++;
         }
     }
