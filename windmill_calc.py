@@ -9,7 +9,7 @@ class Windmill_Calc:
         self.winds = []
         self.last_message = []
         for i in range(len(self.windmill_num)):
-            self.winds[i] = Queue()
+            self.winds.append(Queue())
             self.last_message.append(-1)
             
     def get_msg(self, signal):
@@ -18,11 +18,11 @@ class Windmill_Calc:
         for i in range(self.windmill_num):
             s = self.winds[i].get()
             if self.last_signal is s:
-                msg[i] = -1
+                msg.append(-1) 
             elif self.last_signal is 1 and s is 0:
-                msg[i] = 0
+                msg.append(0)
             elif self.last_signal is 0 and s is 1:
-                msg[i] = 1
+                msg.append(1)
         strmsg = self.array_to_str(msg)
         print("[INFO]Send Msg ...", strmsg)
         return strmsg 

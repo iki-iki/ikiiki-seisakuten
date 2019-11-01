@@ -21,15 +21,15 @@ void setup() {
 
 void loop() {
     String recv_str;
-    char recv[32];
     while (Serial.available()){
-        recv[i] = Serial.readStringUntil(".");
-        recv_str.toCharArray(recv, winds_num);
-
-        for(unsigned int i=0; recv[i]=="."; i++)
-            if(recv[i] == 'a'){ winds_signal[i]=1;}
-            else if(recv[i] == 'b') { winds_signal[i]=0;}
-            else if(recv[i] == 'c') { winds_signal[i]=-1;}
+        recv_str = Serial.readStringUntil(".");
+        int str_len  recv_str.length() - 3;
+        for(unsigned int i=0; i<str_len; i++){
+            String ss;
+            ss = recv_str.charAt(i);
+            if(!ss.compareTo("a")){ winds_signal[i]=1;}
+            else if(ss.compareTo("b")) { winds_signal[i]=0;}
+            else if(ss.compareTo("c")) { winds_signal[i]=-1;}
         }
     }
 

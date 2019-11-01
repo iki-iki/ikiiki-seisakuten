@@ -31,7 +31,7 @@ class Send_Serial:
             s = grovepi.digitalRead(self.sensor_pin)
             v = self.judge_wind(s)
             # 1 : start 0: stop -1 : keep
-            msg = self.WC.calc(v)            
+            msg = self.WC.get_msg(v)            
             self.send_msg(msg)
             time.sleep(.01)
 
@@ -41,6 +41,7 @@ class Send_Serial:
 
     def judge_wind(self, s):
         # print(self.prev, " -> ", s)
+        v = -1
         if s != self.prev: # get state change
             v = 1
             self.state = True
