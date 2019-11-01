@@ -1,26 +1,13 @@
-int pinarray[3] = {8, 9, 10};
-int winds = 0;
-int winds_array[3] = {0, 0, 0};
-bool state = false;
-int winds_num = sizeof(winds_array);
+int pinarray[] = {9, 8, 10, 13};
+int winds_num = sizeof(pinarray);
+int winds_signal[];
 
 void action() {
     for(int i=0; i<winds_num; i++){
-        if(winds_array[i] > 0)
-            digitalWrite(pinarray[i], 1);
-        else
-            digitalWrite(pinarray[i], 0);
+        if(winds_signal[i] == -1) 
+            continue;
+        digitalWrite(pinarray[i], winds_signal[i]);
     }
-    // Serial.print(winds_array);
-}
-
-void set_winds() {
-    if(winds < 3 && state)
-        return;
-    for(int i=winds_num-1; i>0; i--) {
-        winds_array[i] = winds_array[i-1];
-    }
-    winds_array[0] = winds;
 }
 
 void setup() {
@@ -35,15 +22,9 @@ void loop() {
     while (Serial.available()){
         int inputchar = Serial.read();
 
-        switch(inputchar){
-            case 'a':
-                winds += 1;
-                state = true;
-                break;
-            case 'b':
-                winds -= 1;
-                state = false;
-                break;
-        }
+        if(inputchar[0] == "a") { winds_signal[0] = 1; }
+        else if(inputchar[0] == "b") { winds_signal[0] = 0; }
+        else if(inputchar[0] == "c") { winds_signal[0] = -1; }
     }
+    action();
 }
