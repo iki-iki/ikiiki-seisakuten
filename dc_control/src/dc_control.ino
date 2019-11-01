@@ -1,6 +1,6 @@
 int pinarray[] = {9, 8, 10, 13};
 int winds_num = sizeof(pinarray);
-int winds_signal;
+int winds_signal[4];
 
 void action() {
     for(int i=0; i<winds_num; i++){
@@ -25,7 +25,7 @@ void loop() {
     while (Serial.available()){
         recv[i] = Serial.read();
 
-        if(i>winds_num || received[i] == "."){
+        if(i>winds_num || recv[i] == "."){
             // recv[i] = '\0';
             break;
         } else {
