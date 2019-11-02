@@ -2,13 +2,13 @@ from queue import Queue
 
 class Windmill_Calc:
     def __init__(self):
-        self.windmill_num = 3
+        self.windmill_num = 4 
         # init winds value
-        self.distance = [2, 4, 6] 
+        self.distance = [0, 2, 4, 6] 
         self.last_signal = 0 
         self.winds = []
         self.last_message = []
-        for i in range(len(self.windmill_num)):
+        for i in range(self.windmill_num):
             self.winds.append(Queue())
             self.last_message.append(-1)
             

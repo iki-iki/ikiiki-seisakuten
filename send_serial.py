@@ -14,10 +14,15 @@ class Send_Serial:
     def __init__(self, tty, baud):
         # init serial
         self.ser = serial.Serial(tty, baud, timeout=0.1)
+        print("connecting", end="")
+        for i in range(5):
+            time.sleep(1)
+            print(".", end="")
+        print()
         # init sensor settings
         self.sensor_pin = 4
         grovepi.pinMode(self.sensor_pin, "INPUT")
-        self.prev = 0
+        self.prev = -1 
         # init variables
         self.stop_time = time.time()
         self.stop_duration = 3
@@ -33,7 +38,7 @@ class Send_Serial:
             # 1 : start 0: stop -1 : keep
             msg = self.WC.get_msg(v)            
             self.send_msg(msg)
-            time.sleep(.01)
+            time.sleep(1)
 
     def send_msg(self, msg):
         print("[INFO] send ...", msg)
