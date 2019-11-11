@@ -1,8 +1,9 @@
 import time
 import serial
 
+PORT = "COM7"
 print("Serial Connecting...")
-ser = serial.Serial('COM7', 115200, timeout=1)
+ser = serial.Serial(PORT, 115200, timeout=1)
 time.sleep(5)
 
 signals = [b"aaaa", b"bbbb", b"cccc"]
@@ -20,8 +21,9 @@ for i in range(4):
     send_signal(0)
     send_signal(2)
     send_signal(2)
-    send_signal(1)
     send_signal(2)
+    send_signal(2)
+    send_signal(1)
     send_signal(2)
 
 ser.close()
