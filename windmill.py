@@ -1,5 +1,5 @@
 from queue import Queue
-from Windmill_Calculator import WindMill, Windmill_Calculator
+from calc import WindMill, Windmill_Calculator
 
 # cm
 WINDMILL_POSITIONS = [
@@ -17,14 +17,14 @@ class Windmill_Controller:
         # init winds value
         for i in range(self.windmill_num):
             self.windmills.append(WindMill(WINDMILL_POSITIONS[i]))
-        self.WC = Windmill_Calculator(self.windmills)
+        self.calculator = Windmill_Calculator(self.windmills)
 
-    # bRotatings : array of flag
+    # bRotatings : array of sensor flag
     def gen_msg(self, bRotatings):
-        self.WC.calc(bRotatings)
+        self.calculator.calc(bRotatings)
         msg = []
         for i in range(self.windmill_num):
-            msg.append(self.windmills[i].send_signal)
+            msg.append(self.windmills[i].signal)
         strmsg = self.array_to_str(msg)
         return strmsg
 
