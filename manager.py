@@ -15,29 +15,23 @@ class Manager:
     def thread_init(self):
         self.t1 = threading.Thread(target=self.read_input)
         self.t2 = threading.Thread(target=self.serial_output)
-        self.t2_duration = 1.0
-        self.t2_time = 0
         self.t1.start()
         self.t2.start()
     
-    def main(self):
+    def t1(self):
         while True:
-            try:
-                self.t1.join(1)
-                self.t2.join(1)
-            except:
-                self.t1.stop()
-                self.t2.stop()
-        print("=========PROGRAM FINISHED")
-    
+            self.read_input()
+            time.sleep(.1)
+
     def read_input(self):
         self.SH.judge_if_rotating()
+
+    def t2(self):
+        while True:
+            self.serial_output()
+            time.sleep(1)
     
     def serial_output(self):
-        now = time.time()
-        if now - self.t2_time < self.t2_duration:
-            return
-        self.t2_time = now
         msg = self.WC.gen_msg(self.SH.get_flags())            
         self.serialController.send_msg(msg)
         self.send_osc_message()

@@ -9,7 +9,6 @@ class Ikiiki:
 
     def main_loop(self):
         self.manager.thread_init()
-        self.manager.main()
 
 
 if __name__ == '__main__':
