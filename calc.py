@@ -24,11 +24,11 @@ class Windmill_Calculator:
         if l is 0:
             return states
         for i in range(l):
-            ind = pins[i]
-            if ind < 31:
+            ind = pins[i]-1
+            if ind < 30:
                 s = self.windmills[ind].bRotating
             else:
-                indx = ind - 31
+                indx = ind - 30
                 s = self.sensor_info[indx]
             states.append(int(s))
         return states

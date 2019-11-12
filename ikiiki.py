@@ -12,5 +12,6 @@ class Ikiiki:
         self.manager.main()
 
 
-ikiiki = Ikiiki()
-ikiiki.main_loop()
+if __name__ == '__main__':
+    ikiiki = Ikiiki()
+    ikiiki.main_loop()

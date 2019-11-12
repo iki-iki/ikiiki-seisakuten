@@ -47,7 +47,7 @@ class WindMill:
             self.move = 0
 
     def get_read_pins(self, mode):
-        return WINDMILL_RELATION[self.index][mode]
+        return WINDMILL_RELATION[self.index-1][mode]
         
     def next_rotating(self, pinsaround):
         if len(pinsaround) is 0:

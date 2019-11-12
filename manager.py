@@ -21,8 +21,14 @@ class Manager:
         self.t2.start()
     
     def main(self):
-        self.t1.join()
-        self.t2.join()
+        while True:
+            try:
+                self.t1.join(1)
+                self.t2.join(1)
+            except:
+                self.t1.stop()
+                self.t2.stop()
+        print("=========PROGRAM FINISHED")
     
     def read_input(self):
         self.SH.judge_if_rotating()
@@ -42,4 +48,4 @@ class Manager:
         windmills = self.WC.get_signal()
         t = sensors + windmills
         t = map(int, t)
-        self.OC.send(t)
+        self.OC.send(list(t))
