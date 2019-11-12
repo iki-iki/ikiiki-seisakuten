@@ -2,6 +2,7 @@
 # LOW : white 
 
 import grovepi
+import time
 
 class Sensor:
     def __init__(self, _pin, _pos):
@@ -45,7 +46,7 @@ class Sensor_Handler:
             self.sensors[i].read_value()
             self.sensors[i].judge_if_rotating()
 
-    def flags(self):
+    def get_flags(self):
         flags = []
         for i in range(len(self.pins)):
             flags.append(self.sensors[i].bRotating)

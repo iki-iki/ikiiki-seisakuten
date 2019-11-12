@@ -32,14 +32,14 @@ class Manager:
         if now - self.t2_time < self.t2_duration:
             return
         self.t2_time = now
-        msg = self.WC.gen_msg(self.SH.flags)            
+        msg = self.WC.gen_msg(self.SH.get_flags())            
         self.serialController.send_msg(msg)
         self.send_osc_message()
 
     def send_osc_message(self):
         info = []
-        sensors = self.SH.flags()
-        windmills = self.WC.flags()
+        sensors = self.SH.get_flags()
+        windmills = self.WC.get_signal()
         t = sensors + windmills
         t = map(int, t)
         self.OC.send(t)

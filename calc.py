@@ -28,7 +28,8 @@ class Windmill_Calculator:
             if ind < 31:
                 s = self.windmills[ind].bRotating
             else:
-                s = self.sensor_info[ind-31]
+                indx = ind - 31
+                s = self.sensor_info[indx]
             states.append(int(s))
         return states
 

@@ -49,7 +49,7 @@ class Windmill_Controller:
         s += b"."
         return s
 
-    def flags(self):
+    def get_signal(self):
         msg =[]
         for i in range(self.windmill_num):
             msg.append(self.windmills[i].signal)
