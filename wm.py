@@ -64,3 +64,4 @@ class WindMill:
             self.signal = -1
         else:
             self.signal = rotating
+        self.bRotating = rotating

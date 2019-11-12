@@ -19,7 +19,7 @@ class Sensor {
         int xx = int(x*scale); int yy = int(y*scale);
         
         if (bWinding){
-            color(255, 0, 0);
+            fill(150, 100);
             noStroke();
         } else {
             fill(255);
@@ -34,8 +34,10 @@ class Sensor {
 
     void drawIndex(int x, int y) {
         textSize(20);
-        fill(10);
-        text("S"+str(index), x, y);
+        if(bWinding) fill(255);
+        else fill(10);
+        String c = "S" + str(index);
+        float cw = textWidth(c);
+        text(c, x-cw/2, y);
     }
-
 };

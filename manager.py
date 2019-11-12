@@ -10,7 +10,7 @@ class Manager:
         self.serialController = Serial_Controller(tty, baud)
         self.SH = Sensor_Handler()
         self.WC = Windmill_Controller()
-        self.OC = Osc_Handler("127.0.0.1", 12345, '/windmill')
+        self.OC = Osc_Handler("127.0.0.1", 1234, '/windmill')
 
     def thread_init(self):
         self.t1 = threading.Thread(target=self.t1)
@@ -39,7 +39,8 @@ class Manager:
     def send_osc_message(self):
         info = []
         sensors = self.SH.get_flags()
-        windmills = self.WC.get_signal()
+        windmills = self.WC.get_states()
         t = sensors + windmills
-        t = map(int, t)
-        self.OC.send(list(t))
+        t = list(map(int, t))
+        print("SendOsc", t)
+        self.OC.send(t)

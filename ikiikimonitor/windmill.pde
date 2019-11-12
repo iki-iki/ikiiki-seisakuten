@@ -29,7 +29,7 @@ class Windmill {
         int xx = int(x*scale); int yy = int(y*scale);
         
         if (bRotating){
-            color(255, 0, 0);
+            fill(255,0,0,150);
             noStroke();
         } else {
             fill(255);
@@ -44,7 +44,10 @@ class Windmill {
 
     void drawIndex(int x, int y) {
         textSize(20);
-        fill(10);
-        text(str(index), x, y);
+        if(bRotating) fill(255);
+        else fill(10);
+        String c = str(index);
+        float cw = textWidth(c);
+        text(c, x-cw/2, y);
     }
 };

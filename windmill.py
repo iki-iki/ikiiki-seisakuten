@@ -54,3 +54,9 @@ class Windmill_Controller:
         for i in range(self.windmill_num):
             msg.append(self.windmills[i].signal)
         return msg
+    
+    def get_states(self):
+        states = []
+        for i in range(self.windmill_num):
+            states.append(self.windmills[i].bRotating)
+        return states
