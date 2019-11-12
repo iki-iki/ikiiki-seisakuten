@@ -1,6 +1,6 @@
 from manager import Manager
 
-TTY = "/dev/ttyUSB0"
+TTY = "/dev/ttyACM0"
 BAUD = 115200 
 
 class Ikiiki:
