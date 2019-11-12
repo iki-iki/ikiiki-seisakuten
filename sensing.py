@@ -22,7 +22,7 @@ class Sensor:
             print("[INFO]start wind")
         else: # if state not changes
             if self.bRotating is True:
-                print("[INFO]stopping")
+                pass
             else:
                 duration = time.time() - self.stop_interval
                 if duration > self.stop_interval:

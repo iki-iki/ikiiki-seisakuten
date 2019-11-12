@@ -13,8 +13,8 @@ class Manager:
         self.OC = Osc_Handler("127.0.0.1", 12345, '/windmill')
 
     def thread_init(self):
-        self.t1 = threading.Thread(target=self.read_input)
-        self.t2 = threading.Thread(target=self.serial_output)
+        self.t1 = threading.Thread(target=self.t1)
+        self.t2 = threading.Thread(target=self.t2)
         self.t1.start()
         self.t2.start()
     
