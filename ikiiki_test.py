@@ -8,14 +8,14 @@ time.sleep(5)
 
 signals = [b"aaaaa", b"bbbb", b"cccc"]
 
-def create_signal(i):
+def create_signal(ind):
     signal = ""
     for i in range(30):
-        if i is 0:
+        if ind is 0:
             signal += "a"
-        elif i is 1:
+        elif ind is 1:
             signal += "b"
-        elif i is 2:
+        elif ind is 2:
             signal += "c"
     signal = signal.encode()
     return signal

@@ -46,9 +46,16 @@ class WindMill:
         if self.move is 3:
             self.move = 0
 
-    def read_othresignal(self, mode, sensors):
-        read_signal = WINDMILL_RELATION[self.index][mode]
-        if len(read_signal) is not 0:
+    def get_read_pins(self, mode):
+        return WINDMILL_RELATION[self.index][mode]
+        
+    def next_rotating(self, pinsaround):
+        if len(pinsaround) is 0:
+            return 0
+        if 1 in pinsaround:
+            return 1
+        else:
+            return 0
             
 
     def set_signal(self, rotating):

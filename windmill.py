@@ -25,12 +25,16 @@ class Windmill_Controller:
         for i in range(self.windmill_num):
             self.windmills.append(WindMill(WINDMILL_POSITIONS[i], i+1))
         self.calculator = Windmill_Calculator(self.windmills)
+        self.loop_index = 0
 
     # bRotatings : array of sensor flag
     def gen_msg(self, bRotatings):
         self.calculator.calc(bRotatings)
         msg = self.flags() 
         strmsg = self.array_to_str(msg)
+        self.loop_index += 1
+        if loop_index % 100 is 0:
+            self.calculator.changeMode()
         return strmsg
 
     def array_to_str(self, a):
