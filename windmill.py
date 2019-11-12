@@ -1,12 +1,19 @@
 from queue import Queue
-from calc import WindMill, Windmill_Calculator
+from calc import Windmill_Calculator
+from wm import WindMill
 
 # cm
 WINDMILL_POSITIONS = [
-    [100, 100],
-    [20, 20],
-    [30, 30],
-    [50, 50]
+    [20, 160], [25, 130], [35, 150], 
+    [40, 120], [50, 135], [70, 150], 
+    [35, 100], [59, 108], [70, 125],
+    [87, 140], [45, 70],  [85, 110],
+    [110, 135],[50, 50],  [75, 75],
+    [113, 98], [135, 130],[72, 40],
+    [105, 70], [145, 110],[75, 15],
+    [96, 42],  [140, 85], [102, 20],
+    [113, 36], [128, 58], [165, 70],
+    [170, 85], [130, 30], [150, 50]
 ]
 
 
@@ -16,7 +23,7 @@ class Windmill_Controller:
         self.windmills = []
         # init winds value
         for i in range(self.windmill_num):
-            self.windmills.append(WindMill(WINDMILL_POSITIONS[i]))
+            self.windmills.append(WindMill(WINDMILL_POSITIONS[i], i+1))
         self.calculator = Windmill_Calculator(self.windmills)
 
     # bRotatings : array of sensor flag

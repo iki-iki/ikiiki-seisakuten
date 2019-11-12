@@ -6,10 +6,22 @@ print("Serial Connecting...")
 ser = serial.Serial(PORT, 115200, timeout=1)
 time.sleep(5)
 
-signals = [b"aaaa", b"bbbb", b"cccc"]
+signals = [b"aaaaa", b"bbbb", b"cccc"]
+
+def create_signal(i):
+    signal = ""
+    for i in range(30):
+        if i is 0:
+            signal += "a"
+        elif i is 1:
+            signal += "b"
+        elif i is 2:
+            signal += "c"
+    signal = signal.encode()
+    return signal
 
 def send_signal(sig_ind):
-    signal = signals[sig_ind]
+    signal = create_signal(sig_ind) 
     ser.write(signal)
     print("write", signal)
     print(ser.readline())

@@ -1,7 +1,7 @@
 import time
 import threading
 from windmill import Windmill_Controller
-from util import Serial_Controller, Osc_Handle
+from util import Serial_Controller, Osc_Handler
 from sensing import Sensor_Handler 
 
 
@@ -10,7 +10,7 @@ class Manager:
         self.serialController = Serial_Controller(tty, baud)
         self.SH = Sensor_Handler()
         self.WC = Windmill_Controller()
-        self.OC = Osc_Handle("127.0.0.1", 12345, '/windmill')
+        self.OC = Osc_Handler("127.0.0.1", 12345, '/windmill')
 
     def thread_init(self):
         self.t1 = threading.Thread(target=self.read_input)

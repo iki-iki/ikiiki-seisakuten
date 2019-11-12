@@ -1,5 +1,5 @@
-int pinarray[] = {9, 8, 10, 13};
-int winds_num = 4;
+int pinarray[] = {22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51};
+int winds_num = 30;
 
 void setup() {
     for(int i=0; i<winds_num; i++) {
