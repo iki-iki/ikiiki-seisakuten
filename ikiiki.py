@@ -10,3 +10,7 @@ class Ikiiki:
     def main_loop(self):
         self.manager.thread_init()
         self.manager.main()
+
+
+ikiiki = Ikiiki()
+ikiiki.main_loop()
