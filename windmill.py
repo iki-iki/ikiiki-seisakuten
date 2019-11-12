@@ -22,9 +22,7 @@ class Windmill_Controller:
     # bRotatings : array of sensor flag
     def gen_msg(self, bRotatings):
         self.calculator.calc(bRotatings)
-        msg = []
-        for i in range(self.windmill_num):
-            msg.append(self.windmills[i].signal)
+        msg = self.flags() 
         strmsg = self.array_to_str(msg)
         return strmsg
 
@@ -39,3 +37,9 @@ class Windmill_Controller:
                 s += b"c"
         s += b"."
         return s
+
+    def flags(self):
+        msg =[]
+        for i in range(self.windmill_num):
+            msg.append(self.windmills[i].signal)
+        return msg
