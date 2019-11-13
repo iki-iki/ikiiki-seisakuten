@@ -11,11 +11,18 @@ class Windmill_Calculator:
     # set signal value for each windmill class
     def calc(self, bRotatings):
         self.sensor_info = bRotatings
+        print("sensorinfo", self.sensor_info)
+        next_states = []
         for i in range(len(self.windmills)):
             checkpins = self.windmills[i].get_read_pins(self.wind_mode)
+            print("checkpins", i+1, checkpins, end="")
             states = self.get_states(checkpins)
-            next_states = self.windmills[i].next_rotating(states)
-            self.windmills[i].set_signal(next_states)
+            print("STATES", states, end="")
+            next_state = self.windmills[i].next_rotating(states)
+            print("nextstates", next_state)
+            next_states.append(next_state)
+        for i in range(len(next_states)):
+            self.windmills[i].set_signal(next_states[i])
 
     
     def get_states(self, pins):

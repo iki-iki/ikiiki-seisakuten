@@ -3,6 +3,7 @@
 
 import grovepi
 import time
+import random
 
 class Sensor:
     def __init__(self, _pin, _pos):
@@ -15,11 +16,13 @@ class Sensor:
 
     def read_value(self):
         self.val = grovepi.digitalRead(self.pin)
+        r = random.random()
+        # self.val = 1 if r > 0.7 else 0
 
     def judge_if_rotating(self):
         if self.val != self.pre_val: # get state change
             self.bRotating = True
-            print("[INFO]start wind")
+            # print("[INFO]start wind")
         else: # if state not changes
             if self.bRotating is True:
                 pass
@@ -29,7 +32,7 @@ class Sensor:
                     self.bRotating = False
                 else:
                     self.bRotating = True
-                    print("[INFO]stopping....")
+                    # print("[INFO]stopping....")
         # record current state
         self.pre_val = self.val 
  
@@ -50,4 +53,5 @@ class Sensor_Handler:
         flags = []
         for i in range(len(self.pins)):
             flags.append(self.sensors[i].bRotating)
+            # flags.append(self.sensors[i].val)
         return flags

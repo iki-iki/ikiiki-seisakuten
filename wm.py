@@ -58,10 +58,10 @@ class WindMill:
             return 0
             
 
-    def set_signal(self, rotating):
+    def set_signal(self, signal):
         self.prev_rotating = self.bRotating
-        if rotating == self.prev_rotating:
+        if signal == bool(self.prev_rotating):
             self.signal = -1
         else:
-            self.signal = rotating
-        self.bRotating = rotating
+            self.signal = signal 
+        self.bRotating = signal 

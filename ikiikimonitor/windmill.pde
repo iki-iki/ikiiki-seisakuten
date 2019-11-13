@@ -29,7 +29,7 @@ class Windmill {
         int xx = int(x*scale); int yy = int(y*scale);
         
         if (bRotating){
-            fill(255,0,0,150);
+            fill(150, 100);
             noStroke();
         } else {
             fill(255);

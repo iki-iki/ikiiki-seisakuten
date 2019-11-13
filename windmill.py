@@ -1,5 +1,6 @@
 from queue import Queue
-from calc import Windmill_Calculator
+# from calc import Windmill_Calculator
+from calc2 import Wind_Operator
 from wm import WindMill
 
 # cm
@@ -24,18 +25,31 @@ class Windmill_Controller:
         # init winds value
         for i in range(self.windmill_num):
             self.windmills.append(WindMill(WINDMILL_POSITIONS[i], i+1))
-        self.calculator = Windmill_Calculator(self.windmills)
+        # self.calculator = Windmill_Calculator(self.windmills)
+        self.calc = Wind_Operator()
         self.loop_index = 0
 
-    # bRotatings : array of sensor flag
-    def gen_msg(self, bRotatings):
-        self.calculator.calc(bRotatings)
-        msg = self.get_signal() 
-        strmsg = self.array_to_str(msg)
+    def create_msg(self, bRotatings):
+        print('calc')
+        self.calc.handle_new_winds(bRotatings)
+        winds_list = self.calc.get_winds_place()
+        for i in range(30):
+            self.windmills[i].set_signal(winds_list[i])
+        strmsg = self.array_to_str(winds_list)
         self.loop_index += 1
         if self.loop_index % 100 is 0:
-            self.calculator.changeMode()
-        return strmsg
+            self.calc.changeMode()
+
+    # bRotatings : array of sensor flag
+    # def gen_msg(self, bRotatings):
+    #     print('calc')
+    #     self.calculator.calc(bRotatings)
+    #     msg = self.get_signal() 
+    #     strmsg = self.array_to_str(msg)
+    #     self.loop_index += 1
+    #     if self.loop_index % 100 is 0:
+    #         self.calculator.changeMode()
+    #     return strmsg
 
     def array_to_str(self, a):
         s = b""
@@ -49,11 +63,11 @@ class Windmill_Controller:
         s += b"."
         return s
 
-    def get_signal(self):
-        msg =[]
-        for i in range(self.windmill_num):
-            msg.append(self.windmills[i].signal)
-        return msg
+    # def get_signal(self):
+    #     msg =[]
+    #     for i in range(self.windmill_num):
+    #         msg.append(self.windmills[i].signal)
+    #     return msg
     
     def get_states(self):
         states = []
