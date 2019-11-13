@@ -8,7 +8,11 @@ class Ikiiki:
         self.manager = Manager(TTY, BAUD)
 
     def main_loop(self):
-        self.manager.main()
+        while True:
+            try:
+                self.manager.main()
+            except KeyboardInterrupt:
+                sys.exit()
 
 
 if __name__ == '__main__':

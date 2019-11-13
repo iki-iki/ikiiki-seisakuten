@@ -6,7 +6,7 @@ import time
 import random
 
 class Sensor:
-    def __init__(self, _pin, _pos):
+    def __init__(self, _pin):
         self.pin = _pin 
         self.val = 0
         self.pre_val = 0
@@ -16,7 +16,7 @@ class Sensor:
 
     def read_value(self):
         self.val = grovepi.digitalRead(self.pin)
-        r = random.random()
+        # r = random.random()
         # self.val = 1 if r > 0.7 else 0
 
     def judge_if_rotating(self):
@@ -42,7 +42,7 @@ class Sensor_Handler:
         self.positions = [[0, 0], [10, 0], [0, 10]]
         self.sensors = []
         for i in range(len(self.pins)):
-            self.sensors.append(Sensor(self.pins[i], self.positions))
+            self.sensors.append(Sensor(self.pins[i])
             
     def judge_if_rotating(self):
         for i in range(len(self.pins)):

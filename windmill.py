@@ -39,6 +39,7 @@ class Windmill_Controller:
         self.loop_index += 1
         if self.loop_index % 100 is 0:
             self.calc.changeMode()
+        return strmsg
 
     # bRotatings : array of sensor flag
     # def gen_msg(self, bRotatings):

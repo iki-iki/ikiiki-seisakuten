@@ -8,15 +8,14 @@ class Manager:
         self.serialController = Serial_Controller(tty, baud)
         self.SH = Sensor_Handler()
         self.WC = Windmill_Controller()
-        self.OC = Osc_Handler("127.0.0.1", 1234, '/windmills')
+        self.OC = Osc_Handler("157.82.207.244", 1234, '/windmills')
         self.t = time.time()
 
     def main(self):
-        while True:
-            self.read_input()
-            if time.time() - self.t > 1:
-                self.serial_output()
-                self.t = time.time()
+        self.read_input()
+        if time.time() - self.t > 2:
+            self.serial_output()
+            self.t = time.time()
             
     def read_input(self):
         self.SH.judge_if_rotating()
