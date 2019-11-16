@@ -6,43 +6,45 @@ import time
 import random
 
 class Sensor:
-    def __init__(self, _pin, _pos):
+    def __init__(self, _pin):
         self.pin = _pin 
         self.val = 0
         self.pre_val = 0
         self.bRotating = False
-        self.stop_interval = 0.5
+        self.bStopping = False
+        self.stop_interval = 3.5 
+        self.stop_time = time.time() 
         grovepi.pinMode(self.pin, "INPUT")
 
     def read_value(self):
+        self.pre_val = self.val
         self.val = grovepi.digitalRead(self.pin)
-        r = random.random()
+        # r = random.random()
         # self.val = 1 if r > 0.7 else 0
 
     def judge_if_rotating(self):
         if self.val != self.pre_val: # get state change
             self.bRotating = True
-            # print("[INFO]start wind")
+            self.bStopping = False
         else: # if state not changes
-            if self.bRotating is True:
-                pass
+            if self.bRotating is True and self.bStopping is False:
+                self.stop_time = time.time()
+                self.bStopping = True
             else:
-                duration = time.time() - self.stop_interval
-                if duration > self.stop_interval:
+                duration = time.time() - self.stop_time
+                if duration > self.stop_interval and duration < 10000:
                     self.bRotating = False
+                    self.bStopping = False
                 else:
                     self.bRotating = True
-                    # print("[INFO]stopping....")
-        # record current state
-        self.pre_val = self.val 
+                    self.bStopping = True
  
 class Sensor_Handler:
     def __init__(self):
         self.pins = [2, 3, 4]
-        self.positions = [[0, 0], [10, 0], [0, 10]]
         self.sensors = []
         for i in range(len(self.pins)):
-            self.sensors.append(Sensor(self.pins[i], self.positions))
+            self.sensors.append(Sensor(self.pins[i]))
             
     def judge_if_rotating(self):
         for i in range(len(self.pins)):
@@ -55,3 +57,18 @@ class Sensor_Handler:
             flags.append(self.sensors[i].bRotating)
             # flags.append(self.sensors[i].val)
         return flags
+
+if __name__ == '__main__':
+    sh = Sensor_Handler()
+    while True:
+        try:
+            sh.judge_if_rotating()
+            sflag = []
+            for i in range(3):
+                sflag.append(sh.sensors[i].val)
+            print("bval", sflag)
+            flag = sh.get_flags()
+            print("flag",flag)
+            time.sleep(.1)
+        except KeyboardInterrupt:
+            break

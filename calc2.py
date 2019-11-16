@@ -4,7 +4,7 @@ from wind import Wind
 class Wind_Operator:
     def __init__(self):
         self.winds = deque()
-        self.wind_mode = 0
+        self.wind_mode = 1
 
     def changeMode(self):
         self.wind_mode += 1
@@ -17,7 +17,7 @@ class Wind_Operator:
 
     def handle_new_winds(self, winds):
         for i, w in enumerate(winds):
-            if w is 1:
+            if w is True:
                 self.add_wind(i, self.wind_mode)
 
     def get_winds_place(self):
@@ -28,7 +28,7 @@ class Wind_Operator:
             wi += 1
             w = self.winds.popleft()
             positions = w.get_next()
-            print("positions", wi, positions)
+            # print("positions", wi, positions)
             if len(positions) is not 0:
                 for i in range(len(positions)):
                     ind = positions[i] - 1

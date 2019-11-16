@@ -24,4 +24,7 @@ class Osc_Handler:
         for i in range(len(signal)):
             msg.add_arg(signal[i])
         m = msg.build()
-        self.client.send(m)
+        try:
+            self.client.send(m)
+        except:
+            print("osc error..")

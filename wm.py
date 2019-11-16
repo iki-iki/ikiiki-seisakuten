@@ -63,5 +63,5 @@ class WindMill:
         if signal == bool(self.prev_rotating):
             self.signal = -1
         else:
-            self.signal = signal 
+            self.signal = int(signal) 
         self.bRotating = signal 
