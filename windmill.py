@@ -30,15 +30,15 @@ class Windmill_Controller:
         self.loop_index = 0
 
     def create_msg(self, bRotatings):
-        print(bRotatings)
+        # print()
+        # print(bRotatings)
         self.calc.handle_new_winds(bRotatings)
         winds_list = self.calc.get_winds_place()
         for i in range(self.windmill_num):
             self.windmills[i].set_signal(bool(winds_list[i]))
         strmsg = self.array_to_str(winds_list)
-        self.loop_index += 1
-        if self.loop_index % 100 is 0:
-            self.calc.changeMode()
+        # if self.loop_index % 100 is 0:
+            # self.calc.changeMode()
         return strmsg
 
     def create_msg_demo(self, bRotatings):

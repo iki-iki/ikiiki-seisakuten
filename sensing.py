@@ -24,14 +24,17 @@ class Sensor:
 
     def judge_if_rotating(self):
         if self.val != self.pre_val: # get state change
+            # print("Rotating")
             self.bRotating = True
             self.bStopping = False
         else: # if state not changes
             if self.bRotating is True and self.bStopping is False:
+                # print("Record Stopping Time")
                 self.stop_time = time.time()
                 self.bStopping = True
             else:
                 duration = time.time() - self.stop_time
+                # print("Duration :", duration)
                 if duration > self.stop_interval and duration < 10000:
                     self.bRotating = False
                     self.bStopping = False
@@ -50,13 +53,20 @@ class Sensor_Handler:
         for i in range(len(self.pins)):
             self.sensors[i].read_value()
             self.sensors[i].judge_if_rotating()
+        rot = self.get_rotatings() 
+        print(rot, end="")
 
     def get_flags(self):
         flags = []
         for i in range(len(self.pins)):
             flags.append(self.sensors[i].bRotating)
-            # flags.append(self.sensors[i].val)
         return flags
+
+    def get_rotatings(self):
+        rotatings = []
+        for i in range(len(self.pins)):
+            rotatings.append(self.sensors[i].val)
+        return rotatings
 
 if __name__ == '__main__':
     sh = Sensor_Handler()

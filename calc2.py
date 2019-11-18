@@ -4,7 +4,7 @@ from wind import Wind
 class Wind_Operator:
     def __init__(self):
         self.winds = deque()
-        self.wind_mode = 1
+        self.wind_mode = 0
 
     def changeMode(self):
         self.wind_mode += 1

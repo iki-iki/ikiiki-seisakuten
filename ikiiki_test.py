@@ -40,9 +40,6 @@ def send_for_each(ind_from, ind_to):
     signal = create_sig(ind_from, ind_to)
     print("for each", ind_from, "-", ind_to, signal)
     send_msg(signal)
-    # print(ser.readline())
-    # print(ser.readline())
-    # print(ser.readline())
     time.sleep(1)
 
 ok = [0, 1, 5, 9, 10, 12, 13, 14, 17, 20, 21]
@@ -68,26 +65,21 @@ def send_msg(msg):
     # print(ser.readline())
     # print(ser.readline())
     time.sleep(1)
+
+
 while True:
     try:
-        for i in range(30):
-            send_for_each(0, i)
-            time.sleep(3)
-        # for i in range(6):
-        # for i in ok:
-        # msg = create_sig_without(4)
-        # send_msg(msg)
-        # send_for_each(0, 30)
+        # for i in range(15):
+            # send_for_each(i*2, (i+1)*2)
+            # time.sleep(4)
+        msg = create_sig_without(31)
+        send_msg(msg)
+        # send_for_each(0, 15)
         # wind_from_list(ok)
-        # time.sleep(15)
+        time.sleep(10)
         sig = get_sleep_sig()
         send_msg(sig)
-        time.sleep(3)
+        time.sleep(2)
     except KeyboardInterrupt:
         break
-    # send_for_e1ch(29)
-    # send_for_each(29)
-    # m = get_sleep_sig()
-    # send_msg(m)
-
 ser.close()
