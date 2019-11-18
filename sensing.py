@@ -54,7 +54,7 @@ class Sensor_Handler:
             self.sensors[i].read_value()
             self.sensors[i].judge_if_rotating()
         rot = self.get_rotatings() 
-        print(rot, end="")
+        # print(rot, end="")
 
     def get_flags(self):
         flags = []

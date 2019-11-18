@@ -40,6 +40,8 @@ class WindMill:
         self.signal = -1 # 1(on), 0(off), -1(stay)
         self.prev_rotating = False
         self.index = index
+        self.send_repeat_times = 5
+        self.repeat_time = 0
 
     def changeMode(self):
         self.mode += 1
@@ -60,8 +62,13 @@ class WindMill:
 
     def set_signal(self, signal):
         self.prev_rotating = self.bRotating
-        if signal == bool(self.prev_rotating):
-            self.signal = -1
+        if signal == int(self.prev_rotating):
+            if self.repeat_time < self.send_repeat_times:
+                self.signal = signal
+            else:
+                self.signal = -1
+            self.repeat_time += 1
         else:
-            self.signal = int(signal) 
-        self.bRotating = signal 
+            self.signal = signal 
+            self.repeat_time = 0
+        self.bRotating = bool(signal)

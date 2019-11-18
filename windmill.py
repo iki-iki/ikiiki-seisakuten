@@ -35,8 +35,10 @@ class Windmill_Controller:
         self.calc.handle_new_winds(bRotatings)
         winds_list = self.calc.get_winds_place()
         for i in range(self.windmill_num):
-            self.windmills[i].set_signal(bool(winds_list[i]))
-        strmsg = self.array_to_str(winds_list)
+            self.windmills[i].set_signal(winds_list[i])
+        strmsg = self.get_signal()
+        # strmsg = winds_list
+        strmsg = self.array_to_str(strmsg)
         # if self.loop_index % 100 is 0:
             # self.calc.changeMode()
         return strmsg
